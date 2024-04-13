@@ -11,8 +11,8 @@
 //--------------------------------- INCLUDES ----------------------------------
 #include "user_interface.h"
 #include "led.h"
-#include "gui.h"
-#include "gui_app.h"
+// #include "gui.h"
+// #include "gui_app.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"

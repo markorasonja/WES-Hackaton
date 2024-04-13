@@ -12,9 +12,14 @@
 #include "driver/gpio.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 //---------------------------------- MACROS -----------------------------------
-#define GPIO_BIT_MASK(X) ((1ULL << (X)))
+#define GPIO_LED_BLUE     (14U)
+#define GPIO_BIT_MASK(X)  ((1ULL << (X)))
+#define DELAY_TIME_ON_MS  (800U)
+#define DELAY_TIME_OFF_MS (200U)
 
 //-------------------------------- DATA TYPES ---------------------------------
 /**
@@ -95,6 +100,23 @@ esp_err_t led_off(led_t led)
 
     return esp_err;
 }
+
+
+esp_err_t led_pattern_show(led_t led)
+{
+    // int i;
+    esp_err_t esp_err;
+    for (;;)
+    {
+        esp_err = led_on(led);
+        vTaskDelay(DELAY_TIME_ON_MS / portTICK_PERIOD_MS);
+        esp_err = led_off(led);
+        vTaskDelay(DELAY_TIME_OFF_MS / portTICK_PERIOD_MS);
+    }
+
+    return esp_err;
+}
+
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 

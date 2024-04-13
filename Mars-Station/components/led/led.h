@@ -59,6 +59,15 @@ esp_err_t led_on(led_t led);
  */
 esp_err_t led_off(led_t led);
 
+/**
+ * @brief The function shows the led pattern.
+ *
+ * @param [in] led LED instance (e.g. LED_BLUE).
+ *
+ * @return esp_err_t ESP_OK on success, fail otherwise.
+ */
+esp_err_t led_pattern_show(led_t led);
+
 #ifdef __cplusplus
 }
 #endif

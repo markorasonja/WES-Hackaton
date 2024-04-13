@@ -8,7 +8,8 @@
  */
 
 //--------------------------------- INCLUDES ----------------------------------
-#include "user_interface.h"
+//#include "user_interface.h"
+#include "led.h"
 
 //---------------------------------- MACROS -----------------------------------
 
@@ -23,7 +24,9 @@
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void app_main(void)
 {
-    user_interface_init();
+    // user_interface_init();
+    led_init(LED_BLUE);
+    led_pattern_show(LED_BLUE);
 }
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
