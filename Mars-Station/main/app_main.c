@@ -3,13 +3,18 @@
  *
  * @brief
  *
- * COPYRIGHT NOTICE: (c) 2022 Byte Lab Grupa d.o.o.
+ * COPYRIGHT NOTICE: (c) team StackOverflow
  * All rights reserved.
  */
 
 //--------------------------------- INCLUDES ----------------------------------
 //#include "user_interface.h"
 #include "led.h"
+
+#include "driver/gpio.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include <stdio.h>
 
 //---------------------------------- MACROS -----------------------------------
 
