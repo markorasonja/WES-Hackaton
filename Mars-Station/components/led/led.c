@@ -16,10 +16,12 @@
 #include "freertos/task.h"
 
 //---------------------------------- MACROS -----------------------------------
-#define GPIO_LED_BLUE     (14U)
+#define DELAY_TIME_EARTHQUAKE (250U)
+#define DELAY_ON_BASIC        (800U)
+#define DELAY_OFF_BASIC       (200U)
+
+
 #define GPIO_BIT_MASK(X)  ((1ULL << (X)))
-#define DELAY_TIME_ON_MS  (800U)
-#define DELAY_TIME_OFF_MS (200U)
 
 //-------------------------------- DATA TYPES ---------------------------------
 /**
@@ -38,6 +40,7 @@ typedef struct
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
 static const _led_config_t _led_info[LED_COUNT] = {
     { .led = LED_BLUE, .gpio = 14, .b_is_active_on_high_level = true },
+    { .led = LED_BLUE, .gpio = 26, .b_is_active_on_high_level = true }
 };
 //------------------------------- GLOBAL DATA ---------------------------------
 
@@ -106,18 +109,34 @@ esp_err_t led_pattern_show(led_t led)
 {
     // int i;
     esp_err_t esp_err;
-    for (;;)
+    for (int i=0; i<5; i++)
     {
         esp_err = led_on(led);
-        vTaskDelay(DELAY_TIME_ON_MS / portTICK_PERIOD_MS);
+        vTaskDelay(DELAY_ON_BASIC / portTICK_PERIOD_MS);
         esp_err = led_off(led);
-        vTaskDelay(DELAY_TIME_OFF_MS / portTICK_PERIOD_MS);
+        vTaskDelay(DELAY_OFF_BASIC / portTICK_PERIOD_MS);
     }
 
     return esp_err;
 }
 
+esp_err_t led_earthquake_pattern_show(led_t led1, led_t led2)
+{
+    // int i;
+    esp_err_t esp_err;
+    for (int i=0; i<5; i++)
+    {
+        esp_err = led_on(led1);
+        vTaskDelay(DELAY_TIME_EARTHQUAKE / portTICK_PERIOD_MS);
+        esp_err = led_off(led2);
+        vTaskDelay(DELAY_TIME_EARTHQUAKE / portTICK_PERIOD_MS);
 
-//---------------------------- PRIVATE FUNCTIONS ------------------------------
+        esp_err = led_off(led1);
+        vTaskDelay(DELAY_TIME_EARTHQUAKE / portTICK_PERIOD_MS);
+        esp_err = led_on(led2);
+        vTaskDelay(DELAY_TIME_EARTHQUAKE / portTICK_PERIOD_MS);
+    }
 
-//---------------------------- INTERRUPT HANDLERS -----------------------------
+    return esp_err;
+}
+

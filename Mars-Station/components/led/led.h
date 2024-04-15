@@ -17,6 +17,12 @@ extern "C" {
 //--------------------------------- INCLUDES ----------------------------------
 #include "esp_err.h"
 
+#define DELAY_TIME_ON_MS_BASIC  (800U)
+#define DELAY_TIME_OFF_MS_BASIC (200U)
+
+#define DELAY_TIME_ON_MS_SOS    (100U)
+#define DELAY_TIME_OFF_MS_SOS   (100U)
+
 //---------------------------------- MACROS -----------------------------------
 
 //-------------------------------- DATA TYPES ---------------------------------
@@ -27,7 +33,7 @@ extern "C" {
 typedef enum
 {
     LED_BLUE,
-
+    LED_RED,
     LED_COUNT
 } led_t;
 
@@ -67,6 +73,18 @@ esp_err_t led_off(led_t led);
  * @return esp_err_t ESP_OK on success, fail otherwise.
  */
 esp_err_t led_pattern_show(led_t led);
+
+
+/**
+ * @brief The function shows the led pattern for marsquake.
+ *
+ * @param [in] led1 LED instance (e.g. LED_BLUE).
+ * 
+ * @param [in] led2 LED instance (e.g. LED_BLUE).
+ *
+ * @return esp_err_t ESP_OK on success, fail otherwise.
+ */
+esp_err_t led_earthquake_pattern_show(led_t led1, led_t led2);
 
 #ifdef __cplusplus
 }
